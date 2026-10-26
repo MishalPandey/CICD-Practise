@@ -1,0 +1,32 @@
+name: Inbuilts actions uses at runner with its inputs/paramters
+
+on:
+  push:
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Say Hello
+        run: echo "Hello from the second pipeline!"
+
+      - name: Install
+        env:
+          APP_ENV: dev
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: echo "Hello from the second pipeline! DB_PASSWORD = $DB_PASSWORD"
+
+      - name: Create demo file
+        run: |
+          echo "This is a demo file created by the workflow." > demo.txt
+          echo "File created successfully." |
+
+      - name: Upload Demo
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-demo-artifact
+          path: .
