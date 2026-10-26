@@ -1,9 +1,8 @@
-name: Inbuilts actions uses at runner with its inputs/paramters
+name: Inbuilt Actions Uses at Runner with its Inputs
 
 on:
   push:
   pull_request:
-
   workflow_dispatch:
 
 jobs:
@@ -18,15 +17,22 @@ jobs:
         env:
           APP_ENV: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        run: echo "Hello from the second pipeline! DB_PASSWORD = $DB_PASSWORD"
+        run: |
+          echo "Hello from the second pipeline!"
+          echo "APP_ENV = $APP_ENV"
+          if [ -n "$DB_PASSWORD" ]; then
+            echo "DB_PASSWORD secret is configured"
+          else
+            echo "DB_PASSWORD secret is not configured"
+          fi
 
       - name: Create demo file
         run: |
           echo "This is a demo file created by the workflow." > demo.txt
-          echo "File created successfully." |
+          echo "File created successfully."
 
       - name: Upload Demo
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-demo-artifact
-          path: .
+          path: demo.txt
