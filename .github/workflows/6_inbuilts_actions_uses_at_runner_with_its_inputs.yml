@@ -1,8 +1,8 @@
 name: Inbuilt Actions Uses at Runner with its Inputs
 
 on:
-  push:
-  pull_request:
+#  push:
+#  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -33,6 +33,6 @@ jobs:
 
       - name: Upload Demo
         uses: actions/upload-artifact@v4
-        with:
+        with: #with keyword has been used to pass parameters to action
           name: build-demo-artifact
           path: demo.txt
