@@ -11,14 +11,14 @@ jobs:
 
     steps:
       - name: Say Hello
-        run: echo "Hello from the second pipeline!"
+        run: echo "Hello from the inbuilt actions workflow!"
 
       - name: Install
         env:
           APP_ENV: dev
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          echo "Hello from the second pipeline!"
+          echo "Hello from the inbuilt actions workflow!"
           echo "APP_ENV = $APP_ENV"
           if [ -n "$DB_PASSWORD" ]; then
             echo "DB_PASSWORD secret is configured"
