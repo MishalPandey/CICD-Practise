@@ -1,0 +1,19 @@
+name: Context Object Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions Context Object
+on: [push]
+
+jobs:
+  Explore-Github-Context-Object:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This job was automatically triggered by ${{ github.event_name }} event."
+      - run: echo "The job is running on ${{ runner.os }} hosted runner by github."
+      - run: echo "The name of the branch is ${{ github.ref }} and the commit message is ${{ github.event.head_commit.message }}, and the repository is ${{ github.repository }}."
+      - name: checkout repo code
+        uses: actions/checkout@v4
+      - run: echo "The  ${{ github.repository }} repository has been checked out to the ${{ github.workspace }} directory on the runner."
+      - run: echo "The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+      - run: | 
+         ls ${{ github.workspace }}
+      - run: echo "This job status is ${{ job.status }}"
