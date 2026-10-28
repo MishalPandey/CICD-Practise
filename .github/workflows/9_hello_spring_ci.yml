@@ -19,10 +19,7 @@ jobs:
           java-version: '21'
 
       - name: Build and Test Application
-        working-directory: ./CICD
-        run: |
-          chmod +x gradlew
-          ./gradlew clean build
+        run: chmod +x gradlew && ./gradlew clean build
 
       - name: Upload Test Reports
         if: always()
@@ -49,7 +46,6 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
         with:
-          context: ./CICD
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/hello-spring-boot:latest
