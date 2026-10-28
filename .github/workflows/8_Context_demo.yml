@@ -3,8 +3,8 @@ name: Context Object Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions Context Object
 
 on:
-  push:
-
+#  push:
+  workflow_dispatch:
 jobs:
   Explore-Github-Context-Object:
     runs-on: ubuntu-latest
