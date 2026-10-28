@@ -2,6 +2,11 @@ name: Hello Spring Boot App to Docker
 
 on:
   push:
+    paths:
+        - 'src/**'
+        - 'build.gradle'
+        - 'settings.gradle'
+        - 'gradle/**'
   workflow_dispatch:
 
 jobs:
