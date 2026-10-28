@@ -1,19 +1,40 @@
 name: Context Object Demo
+
 run-name: ${{ github.actor }} is testing out GitHub Actions Context Object
-on: [push]
+
+on:
+  push:
 
 jobs:
   Explore-Github-Context-Object:
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo "This job was automatically triggered by ${{ github.event_name }} event."
-      - run: echo "The job is running on ${{ runner.os }} hosted runner by github."
-      - run: echo "The name of the branch is ${{ github.ref }} and the commit message is ${{ github.event.head_commit.message }}, and the repository is ${{ github.repository }}."
-      - name: checkout repo code
+      - name: Display Trigger Event
+        run: echo "This job was automatically triggered by ${{ github.event_name }} event."
+
+      - name: Display Runner OS
+        run: echo "The job is running on ${{ runner.os }} hosted runner by GitHub."
+
+      - name: Display Repository Information
+        run: |
+          echo "Branch/ref: ${{ github.ref }}"
+          echo "Commit message: ${{ github.event.head_commit.message }}"
+          echo "Repository: ${{ github.repository }}"
+
+      - name: Checkout Repository Code
         uses: actions/checkout@v4
-      - run: echo "The  ${{ github.repository }} repository has been checked out to the ${{ github.workspace }} directory on the runner."
-      - run: echo "The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-      - run: | 
-         ls ${{ github.workspace }}
-      - run: echo "This job status is ${{ job.status }}"
+
+      - name: Display Workspace
+        run: echo "The ${{ github.repository }} repository has been checked out to ${{ github.workspace }}."
+
+      - name: Ready Message
+        run: echo "The workflow is now ready to test your code on the runner."
+
+      - name: List Files in the Repository
+        run: |
+          ls -la "${{ github.workspace }}"
+
+      - name: Display Job Status
+        if: always()
+        run: echo "This job status is ${{ job.status }}"
